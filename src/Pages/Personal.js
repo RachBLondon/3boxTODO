@@ -7,6 +7,10 @@ import TODO from './../Components/TODO';
 
 
 export default class Personal extends Component {
+  state = {
+    posts : null
+  }
+  
   parsePosts = (postArr) => {
     return postArr.map((rawPost) => {
       console.log("rawPost", rawPost)
@@ -33,7 +37,9 @@ export default class Personal extends Component {
     return (
       <div>
         <h2>Personal TODOs</h2>
-        <TODO />
+        {this.state.posts &&
+          <TODO posts={this.state.posts} />
+          }
       </div>
     )
   }
