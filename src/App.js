@@ -5,6 +5,7 @@ import Home from './Pages/Home';
 import Profile from './Pages/Profile'
 import Personal from './Pages/Personal';
 import Team from './Pages/Team';
+import Box from '3box';
 
 
 export default class App extends Component {
@@ -26,6 +27,12 @@ export default class App extends Component {
     await this.getAddressFromMetaMask();
     if (this.state.accounts) {
       // Now MetaMask's provider has been enabled, we can start working with 3Box
+
+      // TODO Add new updated auth methods to docs,
+      const box = await Box.openBox(this.state.accounts[0], window.ethereum);
+      const space = await box.openSpace("3Notes-test");
+      this.setState({space})
+
     }
   }
   render() {
@@ -55,17 +62,21 @@ export default class App extends Component {
             {(!this.state.needToAWeb3Browser && !this.state.accounts) && <h2>Connect MetaMask🤝</h2>}
             {this.state.accounts && (
               <Switch>
-                <Route path="/personal">
-                  <Personal />
-                </Route>
-                <Route path="/team">
-                  <Team />
-                </Route>
-                <Route path="/profile">
-                  <Profile
-                    ethAddress={this.state.accounts[0]}
-                  />
-                </Route>
+                {this.state.space && (
+                  <>
+                  <Route path="/personal">
+                    <Personal space={this.state.space} />
+                  </Route>
+                  <Route path="/team">
+                    <Team />
+                  </Route>
+                  <Route path="/profile">
+                    <Profile
+                      ethAddress={this.state.accounts[0]}
+                    />
+                  </Route>
+                  </>)
+                }
                 <Route path="/">
                   <Home
                     ethAddress={this.state.accounts[0]}
