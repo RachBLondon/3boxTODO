@@ -31,7 +31,7 @@ export default class App extends Component {
       // TODO Add new updated auth methods to docs,
       const box = await Box.openBox(this.state.accounts[0], window.ethereum);
       const space = await box.openSpace("3Notes-test");
-      this.setState({space})
+      this.setState({ space })
 
     }
   }
@@ -48,9 +48,13 @@ export default class App extends Component {
             {this.state.accounts && (
               <Nav fill style={{ width: "100%" }} >
                 <Nav.Item><Link to="/">Home</Link></Nav.Item>
-                <Nav.Item><Link to="/team">Team TODOs</Link></Nav.Item>
-                <Nav.Item><Link to="/personal">Personal TODOs</Link></Nav.Item>
-                <Nav.Item><Link to="/profile">Profile Update</Link></Nav.Item>
+                {this.state.space && (
+                  <>
+                    <Nav.Item><Link to="/team">Team TODOs</Link></Nav.Item>
+                    <Nav.Item><Link to="/personal">Personal TODOs</Link></Nav.Item>
+                    <Nav.Item><Link to="/profile">Profile Update</Link></Nav.Item>
+                  </>)}
+
               </Nav>
             )}
 
@@ -64,17 +68,17 @@ export default class App extends Component {
               <Switch>
                 {this.state.space && (
                   <>
-                  <Route path="/personal">
-                    <Personal space={this.state.space} />
-                  </Route>
-                  <Route path="/team">
-                    <Team />
-                  </Route>
-                  <Route path="/profile">
-                    <Profile
-                      ethAddress={this.state.accounts[0]}
-                    />
-                  </Route>
+                    <Route path="/personal">
+                      <Personal space={this.state.space} />
+                    </Route>
+                    <Route path="/team">
+                      <Team />
+                    </Route>
+                    <Route path="/profile">
+                      <Profile
+                        ethAddress={this.state.accounts[0]}
+                      />
+                    </Route>
                   </>)
                 }
                 <Route path="/">
