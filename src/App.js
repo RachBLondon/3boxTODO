@@ -31,8 +31,7 @@ export default class App extends Component {
       // TODO Add new updated auth methods to docs,
       const box = await Box.openBox(this.state.accounts[0], window.ethereum);
       const space = await box.openSpace("3Notes-test");
-      this.setState({ space })
-
+      this.setState({ space });
     }
   }
   render() {

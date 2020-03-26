@@ -19,8 +19,7 @@ export default class TODO extends Component {
                         borderRadius: '7px'
                 }}>
                     <span style={{margin : '5px'}}>{item.text}</span>
-                    {/* <input style={{margin : '5px'}} type="checkbox" /> */}
-                    <Form.Check aria-label="option 1" inline={true} checked={item.completed}/>
+                    <Form.Check aria-label="option 1" inline={true} checked={item.completed} onChange={()=>(console.log("form checkbox"))}/>
                     <i style={{margin : '5px'}} className="fa fa-trash" aria-hidden="true"></i>
                 </div>))}
         </div>)
