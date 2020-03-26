@@ -5,9 +5,12 @@ import React, {useState} from 'react';
 export default function ModalComponent(props) {
     const [show, setShow] = useState(false);
   
-    const handleClose = () => setShow(false);
+    const handleClose = (props) => {
+      console.log("props",props)
+      props.submitFunc();
+      setShow(false);
+    };
     const handleShow = () => setShow(true);
-    console.log('props', props)
     return (
       <>
         <Button variant="primary" onClick={handleShow}>
@@ -23,11 +26,11 @@ export default function ModalComponent(props) {
           {/* <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
+            </Button>  */}
+            <Button variant="primary" onClick={handleClose.bind(null, props)}>
               Save Changes
             </Button>
-          </Modal.Footer> */}
+          {/* </Modal.Footer> */}
 
           <Modal.Footer />
         </Modal>
