@@ -4,14 +4,10 @@ import ModalComponent from './../Components/Modal';
 import { Form, Button, Container } from 'react-bootstrap';
 
 
-
-
-
-
 export default class Personal extends Component {
   state = {
     posts : null, 
-    newTodo : null
+    newTodo : ""
   }
   
   parsePosts = (postArr) => {
@@ -26,9 +22,7 @@ export default class Personal extends Component {
 
     if(this.state.newTodo){
       const post = JSON.stringify({ text: this.state.newTodo, completed: false, show: true })
-      console.log("Post", post)
       await this.state.personalThread.post(post)
-      console.log("posted", this.state.newTodo)
       this.setState({newTodo : null});
       this.getPosts();
     }
@@ -42,7 +36,6 @@ export default class Personal extends Component {
 
   async componentDidMount() {
     const personalListAddress = await this.props.space.private.get("personalListAddress");
-    // const post = JSON.stringify({ text: 'fed cat' + Date.now(), completed: false, show: true })
     let personalThread
     if(personalListAddress){
       personalThread = await this.props.space.joinThreadByAddress(personalListAddress);
@@ -75,9 +68,6 @@ export default class Personal extends Component {
                 <Form.Label>New Item</Form.Label>
                 <Form.Control type="text" value={this.state.newTodo} onChange={(e)=>(this.setState({newTodo : e.target.value}))} />
               </Form.Group>
-              {/* <Button variant="primary" type="submit" onClick={this.submit}>
-                Submit
-              </Button> */}
             </Form>
             </Container>   
           </ModalComponent>
