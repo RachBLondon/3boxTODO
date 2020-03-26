@@ -61,12 +61,15 @@ export default class Personal extends Component {
             ModalHeader={"Add a Todo"}
             ModalBodyText={"One more thing on the list."}
             submitFunc={this.onSubmit} >
-
           <Container>
             <Form>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>New Item</Form.Label>
-                <Form.Control type="text" value={this.state.newTodo} onChange={(e)=>(this.setState({newTodo : e.target.value}))} />
+                <Form.Control 
+                  type="text" 
+                  value={this.state.newTodo} 
+                  onChange={(e)=>(this.setState({newTodo : e.target.value}))} 
+                  />
               </Form.Group>
             </Form>
             </Container>   
