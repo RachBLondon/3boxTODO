@@ -34,6 +34,11 @@ export default class Personal extends Component {
     this.setState({ posts });
   }
 
+  deletePost =async(postId)=>{
+    await this.state.personalThread.deletePost(postId);
+    await this.getPosts();
+  }
+
   async componentDidMount() {
     const personalListAddress = await this.props.space.private.get("personalListAddress");
     let personalThread
@@ -54,7 +59,7 @@ export default class Personal extends Component {
       <div>
         <h2>Personal TODOs</h2>
         {this.state.posts &&
-          <TODO posts={this.state.posts} />
+          <TODO posts={this.state.posts} deletePost={this.deletePost} />
           }
           <ModalComponent 
             buttonText={"Add a ToDo"}
