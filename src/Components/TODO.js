@@ -19,7 +19,7 @@ export default class TODO extends Component {
                         borderRadius: '7px'
                 }}>
                     <span style={{margin : '5px'}}>{item.text}</span>
-                    <Form.Check aria-label="option 1" inline={true} checked={item.completed} onChange={(e)=>(console.log("form checkbox", e.target.value, item, i))}/>
+                    <Form.Check aria-label="option 1" inline={true} checked={item.completed} onChange={this.props.toggleDone.bind(null, item)}/>
                     <i style={{margin : '5px'}} className="fa fa-trash" aria-hidden="true" onClick={this.props.deletePost.bind(null, item.id)}></i>
                 </div>))}
         </div>)
