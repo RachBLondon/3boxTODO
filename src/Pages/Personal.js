@@ -19,7 +19,7 @@ export default class Personal extends Component {
   }
 
   toggleDone = async(todo)=> {
-    const post = JSON.stringify({ text: todo.text, completed: !todo.completed, show: true, order : todo.order });
+    const post = JSON.stringify({ text: todo.text, completed: !todo.completed, show: true, order : todo.order, postedBy: todo.postedBy });
     await this.state.personalThread.post(post);
     await this.state.personalThread.deletePost(todo.id);
     this.getPosts();
@@ -29,7 +29,7 @@ export default class Personal extends Component {
 
     if (this.state.newTodo) {
       const orderNumber = this.state.posts.length > 0 ? (this.state.posts[this.state.posts.length - 1].order + 1 ): (1)
-      const post = JSON.stringify({ text: this.state.newTodo, completed: false, show: true, order : orderNumber })
+      const post = JSON.stringify({ text: this.state.newTodo, completed: false, show: true, order : orderNumber, postedBy: this.props.accounts[0]})
       await this.state.personalThread.post(post)
       this.setState({ newTodo: null });
       this.getPosts();
@@ -48,7 +48,7 @@ export default class Personal extends Component {
   }
   async componentDidMount() {
     
-    const threadName = "personalListAddress7";
+    const threadName = "personalListAddress8";
     const personalListAddress = await this.props.space.private.get(threadName);
     let personalThread
     if (personalListAddress) {
@@ -67,7 +67,11 @@ export default class Personal extends Component {
       <div>
         <h2>Personal TODOs</h2>
         {this.state.posts &&
-          <TODO posts={this.state.posts} deletePost={this.deletePost} toggleDone={this.toggleDone} />
+          <TODO 
+              posts={this.state.posts} 
+              deletePost={this.deletePost}
+              toggleDone={this.toggleDone}
+              accounts={this.props.accounts} />
         }
         <ModalComponent
           buttonText={"Add a ToDo"}

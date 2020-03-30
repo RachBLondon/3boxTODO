@@ -11,7 +11,7 @@ export default class TODO extends Component {
         return (<div>
             {sortedArray.map((item, int) => {
             const isOwner = item.postedBy === this.props.accounts[0];
-            console.log("isOwner", isOwner)
+       
             return (
                 <div
                     key={int}

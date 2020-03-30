@@ -6,7 +6,6 @@ import Profile from './Pages/Profile'
 import Personal from './Pages/Personal';
 import Team from './Pages/Team';
 import Box from '3box';
-import ProfileHover from 'profile-hover';
 
 export default class App extends Component {
 
@@ -70,7 +69,7 @@ export default class App extends Component {
                 {this.state.space && (
                   <>
                     <Route path="/personal">
-                      <Personal space={this.state.space} />
+                      <Personal space={this.state.space} accounts={this.state.accounts}/>
                     </Route>
                     <Route path="/team">
                       <Team space={this.state.space} accounts={this.state.accounts} />
