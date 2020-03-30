@@ -23,7 +23,12 @@ export default class Team extends Component {
   }
 
   toggleDone = async(todo)=> {
-    const post = JSON.stringify({ text: todo.text, completed: !todo.completed, show: true, order : todo.order });
+    const post = JSON.stringify({ 
+      text: todo.text, 
+      completed: !todo.completed, 
+      show: true, 
+      order : todo.order, 
+      postedBy : todo.postedBy });
     await this.state.teamThread.post(post);
     await this.state.teamThread.deletePost(todo.id);
     this.getPosts();
@@ -33,7 +38,13 @@ export default class Team extends Component {
 
     if (this.state.newTodo) {
       const orderNumber = this.state.posts.length > 0 ? (this.state.posts[this.state.posts.length - 1].order + 1 ): (1)
-      const post = JSON.stringify({ text: this.state.newTodo, completed: false, show: true, order : orderNumber })
+      const post = JSON.stringify({ 
+        text: this.state.newTodo, 
+        completed: false, 
+        show: true, 
+        order : orderNumber,
+        postedBy : this.props.accounts[0]
+       })
       await this.state.teamThread.post(post)
       this.setState({ newTodo: null });
       this.getPosts();
@@ -50,6 +61,7 @@ export default class Team extends Component {
     await this.state.teamThread.deletePost(postId);
     await this.getPosts();
   }
+
   async componentDidMount() {
     
     const threadName = "teamTodos3";
@@ -61,9 +73,8 @@ export default class Team extends Component {
       teamThread = await this.props.space.joinThreadByAddress(moderatorsSpace[threadName]);
     }
 
-    if (!moderatorsSpace[threadName] && isModerator) {
+    if(!moderatorsSpace[threadName] && isModerator) {
       teamThread = await this.props.space.createConfidentialThread('teamList');
-      // await teamThread.addMember('0xab74207ee35fBe1Fb949bdcf676899e9e72Ec530');
       members.map(async(address)=>{ await teamThread.addMember(address)});
       await this.props.space.public.set(threadName, teamThread._address);
     }
@@ -73,8 +84,6 @@ export default class Team extends Component {
       return;
     }
 
-
-    console.log("teamThread", teamThread)
     await this.setState({ teamThread });
     this.getPosts();
   }
@@ -84,7 +93,10 @@ export default class Team extends Component {
       <div>
         <h2>Team TODOs</h2>
         {this.state.posts &&
-          <TODO posts={this.state.posts} deletePost={this.deletePost} toggleDone={this.toggleDone} />
+          <TODO 
+            posts={this.state.posts} 
+            deletePost={this.deletePost} 
+            toggleDone={this.toggleDone} />
         }
         { !this.state.loginAsModerator && (
           <ModalComponent
