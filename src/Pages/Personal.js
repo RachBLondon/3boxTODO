@@ -19,17 +19,17 @@ export default class Personal extends Component {
   }
 
   toggleDone = async(todo)=> {
-    console.log("todo", todo)
-    const post = JSON.stringify({ text: todo.text, completed: !todo.completed, show: true });
-    console.log("post in toggle", post)
+    const post = JSON.stringify({ text: todo.text, completed: !todo.completed, show: true, order : todo.order });
     await this.state.personalThread.post(post);
     await this.state.personalThread.deletePost(todo.id);
     this.getPosts();
   }
 
   onSubmit = async () => {
+
     if (this.state.newTodo) {
-      const post = JSON.stringify({ text: this.state.newTodo, completed: false, show: true })
+      const orderNumber = this.state.posts.length > 0 ? (this.state.posts[this.state.posts.length - 1].order + 1 ): (1)
+      const post = JSON.stringify({ text: this.state.newTodo, completed: false, show: true, order : orderNumber })
       await this.state.personalThread.post(post)
       this.setState({ newTodo: null });
       this.getPosts();
@@ -48,7 +48,7 @@ export default class Personal extends Component {
   }
   async componentDidMount() {
     
-      const threadName = "personalListAddress4";
+    const threadName = "personalListAddress7";
     const personalListAddress = await this.props.space.private.get(threadName);
     let personalThread
     if (personalListAddress) {
@@ -59,7 +59,6 @@ export default class Personal extends Component {
       await this.props.space.private.set(threadName, personalThread._address);
     }
     await this.setState({ personalThread });
-    const posts1 = await this.state.personalThread.getPosts();
     this.getPosts();
   }
 

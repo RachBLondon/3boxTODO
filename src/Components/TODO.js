@@ -3,10 +3,12 @@ import { Form } from 'react-bootstrap';
 
 
 export default class TODO extends Component {
-
+    
     render() {
+        const sortedArray = this.props.posts.sort( (a, b)=> ( a.order - b.order));
+
         return (<div>
-            {this.props.posts.map((item, i) => (
+            {sortedArray.map((item, i) => (
                 <div 
                     key={i}
                     style={{

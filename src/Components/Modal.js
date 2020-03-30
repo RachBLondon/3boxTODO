@@ -6,7 +6,6 @@ export default function ModalComponent(props) {
     const [show, setShow] = useState(false);
   
     const handleClose = (props) => {
-      console.log("props",props)
       if(props && props.submitFunc){
         props.submitFunc();
       }
