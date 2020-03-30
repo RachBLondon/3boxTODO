@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 
-const todos = [{ text: 'fed cat', completed: false, show: true }, { text: 'pay tax', completed: true, show: true }, { text: 'laundry', completed: false, show: true }]
 
 export default class TODO extends Component {
-
 
     render() {
         return (<div>
@@ -19,8 +17,17 @@ export default class TODO extends Component {
                         borderRadius: '7px'
                 }}>
                     <span style={{margin : '5px'}}>{item.text}</span>
-                    <Form.Check aria-label="option 1" inline={true} checked={item.completed} onChange={this.props.toggleDone.bind(null, item)}/>
-                    <i style={{margin : '5px'}} className="fa fa-trash" aria-hidden="true" onClick={this.props.deletePost.bind(null, item.id)}></i>
+                    <Form.Check 
+                        aria-label="option 1" 
+                        inline={true} 
+                        checked={item.completed} 
+                        onChange={this.props.toggleDone.bind(null, item)}/>
+                    <i 
+                        style={{margin : '5px'}} 
+                        className="fa fa-trash" 
+                        aria-hidden="true" 
+                        onClick={this.props.deletePost.bind(null, item.id)}>
+                    </i>
                 </div>))}
         </div>)
     }

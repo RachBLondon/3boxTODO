@@ -46,20 +46,20 @@ export default class Personal extends Component {
     await this.state.personalThread.deletePost(postId);
     await this.getPosts();
   }
-
   async componentDidMount() {
-    const personalListAddress = await this.props.space.private.get("personalListAddress4");
+    
+      const threadName = "personalListAddress4";
+    const personalListAddress = await this.props.space.private.get(threadName);
     let personalThread
     if (personalListAddress) {
       personalThread = await this.props.space.joinThreadByAddress(personalListAddress);
     }
     if (!personalListAddress) {
       personalThread = await this.props.space.createConfidentialThread('personalList');
-      await this.props.space.private.set('personalListAddress', personalThread._address);
+      await this.props.space.private.set(threadName, personalThread._address);
     }
     await this.setState({ personalThread });
     const posts1 = await this.state.personalThread.getPosts();
-    console.log("posts1",posts1)
     this.getPosts();
   }
 
