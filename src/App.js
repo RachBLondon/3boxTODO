@@ -71,7 +71,7 @@ export default class App extends Component {
                       <Personal space={this.state.space} />
                     </Route>
                     <Route path="/team">
-                      <Team />
+                      <Team space={this.state.space} accounts={this.state.accounts} />
                     </Route>
                     <Route path="/profile">
                       <Profile
