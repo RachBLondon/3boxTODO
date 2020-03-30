@@ -6,6 +6,7 @@ import Profile from './Pages/Profile'
 import Personal from './Pages/Personal';
 import Team from './Pages/Team';
 import Box from '3box';
+import ProfileHover from 'profile-hover';
 
 
 export default class App extends Component {
@@ -59,10 +60,12 @@ export default class App extends Component {
 
           </Navbar>
           <div className="container" style={{ paddingTop: '50px' }}>
-            <h1>✅3Box TODOs</h1>
-            <p>Stuff that needs to get done!</p>
-            {this.state.needToAWeb3Browser && <h2>Please install metamask🦊</h2>}
-            {(!this.state.needToAWeb3Browser && !this.state.accounts) && <h2>Connect MetaMask🤝</h2>}
+            <div style={{textAlign : "center"}}>
+              <h1 style={{fontWeight : '900'}}>✅ 3Box TODOs</h1>
+              <p>Stuff that needs to get done!</p>
+            </div>
+            {this.state.needToAWeb3Browser && <h2 style={{textAlign : "center"}}>Please install metamask🦊</h2>}
+            {(!this.state.needToAWeb3Browser && !this.state.accounts) && <h2 style={{textAlign : "center"}}>Connect MetaMask🤝</h2>}
             {this.state.accounts && (
               <Switch>
                 {this.state.space && (

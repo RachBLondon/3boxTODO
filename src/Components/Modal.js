@@ -20,20 +20,12 @@ export default function ModalComponent(props) {
         
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Add a new TODO task</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
           {props.children}
-          {/* <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>  */}
-            <Button variant="primary" onClick={handleClose.bind(null, props)}>
+            <Button variant="primary" onClick={handleClose.bind(null, props)} style={{width : '150px', marginLeft : 'auto', marginRight : 'auto', marginBottom : '30px'}}>
               Save Changes
             </Button>
-          {/* </Modal.Footer> */}
-
-          <Modal.Footer />
         </Modal>
       </>
     );
