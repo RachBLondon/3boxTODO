@@ -6,6 +6,7 @@ import Box from '3box';
 import ProfileHover from 'profile-hover';
 
 const moderatorsAddress = '0x2f4cE4f714C68A3fC871d1f543FFC24b9b3c2386';
+const members = ['0xab74207ee35fBe1Fb949bdcf676899e9e72Ec530', '0xFF326878D13b33591D286372E67B4AF05cD100bd','0xbaeBB7d18f8b16B0A970FDa91f1EfA626D67423E', '0x5c44E8982fa3C3239C6E3C5be2cc6663c7C9387E', '0xa8eE0BABE72cD9A80Ae45dD74Cd3eaE7a82fd5d1', '0x5a7246af4fefe777e32399310b50bb7fe2d04f8a']
 
 export default class Team extends Component {
   state = {
@@ -51,7 +52,7 @@ export default class Team extends Component {
   }
   async componentDidMount() {
     
-    const threadName = "teamTodos2";
+    const threadName = "teamTodos3";
     let teamThread;
     const isModerator = moderatorsAddress.toLowerCase() === this.props.accounts[0].toLowerCase()
     const moderatorsSpace = await Box.getSpace('0x2f4cE4f714C68A3fC871d1f543FFC24b9b3c2386'.toUpperCase(), "3Notes-test");
@@ -62,7 +63,8 @@ export default class Team extends Component {
 
     if (!moderatorsSpace[threadName] && isModerator) {
       teamThread = await this.props.space.createConfidentialThread('teamList');
-      await teamThread.addMember('0xab74207ee35fBe1Fb949bdcf676899e9e72Ec530');
+      // await teamThread.addMember('0xab74207ee35fBe1Fb949bdcf676899e9e72Ec530');
+      members.map(async(address)=>{ await teamThread.addMember(address)});
       await this.props.space.public.set(threadName, teamThread._address);
     }
     
