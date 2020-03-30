@@ -8,7 +8,6 @@ import Team from './Pages/Team';
 import Box from '3box';
 import ProfileHover from 'profile-hover';
 
-
 export default class App extends Component {
 
   state = {
@@ -60,12 +59,12 @@ export default class App extends Component {
 
           </Navbar>
           <div className="container" style={{ paddingTop: '50px' }}>
-            <div style={{textAlign : "center"}}>
-              <h1 style={{fontWeight : '900'}}>✅ 3Box TODOs</h1>
+            <div style={{ textAlign: "center" }}>
+              <h1 style={{ fontWeight: '900' }}>✅ 3Box TODOs</h1>
               <p>Stuff that needs to get done!</p>
             </div>
-            {this.state.needToAWeb3Browser && <h2 style={{textAlign : "center"}}>Please install metamask🦊</h2>}
-            {(!this.state.needToAWeb3Browser && !this.state.accounts) && <h2 style={{textAlign : "center"}}>Connect MetaMask🤝</h2>}
+            {this.state.needToAWeb3Browser && <h2 style={{ textAlign: "center" }}>Please install metamask🦊</h2>}
+            {(!this.state.needToAWeb3Browser && !this.state.accounts) && <h2 style={{ textAlign: "center" }}>Connect MetaMask🤝</h2>}
             {this.state.accounts && (
               <Switch>
                 {this.state.space && (
@@ -86,6 +85,7 @@ export default class App extends Component {
                 <Route path="/">
                   <Home
                     ethAddress={this.state.accounts[0]}
+                    space={this.state.space}
                   />
                 </Route>
               </Switch>
