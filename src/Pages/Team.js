@@ -147,7 +147,7 @@ export default class Team extends Component {
             console.log("joinedconfidentialThreadas team");
             // const posts = await confidentialThread.getPosts();
             // console.log('posts', posts);
-            this.setState({teamThread : confidentialThread});
+            this.setState({teamThread : confidentialThread, teamMembersAdded : mostRecent.added});
             this.getPosts();
 
           } else {
@@ -202,7 +202,7 @@ export default class Team extends Component {
         <h2>Team TODOs</h2>
         <p>Team Member</p>
         <div style={{height : '10vh'}}>
-          {members.map(address => (<ProfileHover address={address} />))}
+          {this.state.teamMembersAdded && this.state.teamMembersAdded.map(address => (<ProfileHover address={address} />))}
           <ProfileHover address={'0x2f4cE4f714C68A3fC871d1f543FFC24b9b3c2386'}/>
         </div>
         <br/>
